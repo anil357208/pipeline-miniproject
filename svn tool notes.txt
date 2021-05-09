@@ -1,0 +1,98 @@
+SVN:
+===
+=>we have to manage repository manually and create an project inside repository
+=>by using check-out , we can get files from repository to local machine
+=>we have to commit your changes once development has been completed ,Because only commited files 
+will be sending them into repository
+=>by using check-in ,we can send files from local to repository
+=>We can distribute only single files ,not for entair workspace
+=>If any other developers want to get updated content in repository then we can take an update everytime
+
+Limitations/con's
+===================
+=>your organization should respnsibilty to manage repository,So we have to recurit seperate admin for that
+=>If we lost connectivty for server ,we can't send files into repository (online )
+=>offline process is not possible 
+=>we can't send/get entair workspace between client and server.
+=>it is difficult to work sampe program for multiple users 
+
+
+GIT Vs GITHUB 
+-> GIT is an client to install in local machine for sending data from local repository to orgin (GITHUB)
+-> GITHUB is cloud based DVCS tool 
+-> We no need to install any peace of software for GITHUB ,just create an account in cloud .
+-> While configuring DVCS tool , the local macine itself having repository (cloned) that called as localrepo
+->by default there is an one branch i.e master 
+-> local master(GIT) --> orgin master(GITHUB)
+-> local master & orgin master will be sync with each other and contained cloned copy in local machine
+-> By using GIT, we can send data from working area to local repository(master)
+-> working area and local repositoy will be same location.
+-> working area --> staging area ---> local repository ---> masterrepo(GITHUB)
+-> working area containes physical files where developer is changing frequently ( untracking )
+-> staging area containes all tracked files (about to commit)
+-> all commited files will move to local repository
+-> finally we can push a
+
+--------------------------------------------------------------
+
+20/03/2021 git notes
+
+
+
+07:47
+
+Chandra Aws to Everyone
+
+20/mar/2021:
+Branching Strategy :
+->A branch is nothing but an independent line of development 
+->best recomendation on default master branch,we should get only updates from GITHUB to local master
+->don't go for pushing directly from local master to orign master
+->we need to create an new branch for all your work .
+-> git branch will help us to get all branches were associated 
+-> git branch < branch-name>
+-> git checkout < branch-name> will help us pointing your repository into associated branch
+-> while pushing files from other than master , mentioned same branch name
+-> merging should be done from branch(future) to branch(master)
+-> pull request will help us to get all updates from future branch to master
+-> once pull request has been generated , We need to merge it then automatically all files will updated into 
+master brach (github)
+-> suppose if we not updated local branch ,then you can
+
+
+
+22/mar/2021:
+Undo commands:
+-> we can revert our files into any location i.e workingarea /staging/local repositroy
+-> while reverting files from working area ,we can use git checkout --<filename>
+-> git checkout command will use in two different ways like branch leavel and repository level
+-> while working on branch level ,It should be transition one branch to another
+-> while working on file level , It should be reverting all content in working area
+-> while reverting files from staging area , We can use git reset HEAD <filename>
+-> HEAD refers to current location of pointer where it is connected .
+-> while reverting wrong commits from local repository,We can use command like git reset HEAD~
+logs details :
+-> git log command will help us to get all commits information
+-> git log --oneline --decorate --graph --all will help us to get all details in detaild format
+       --oneline  : all should be one line
+       --decorate : to decorate format
+       --graph    : to get data as graphical format
+       --all  
+
+
+
+-----------------------------------------------------------------------------------
+
+23/03/2021
+
+GIT Stashing :
+-> It is used to save your un-commited changes ,so you can work on same files for issue fixing.
+-> stashing makes data as work-in-progress
+-> git stash -> it will automaitcally moved all un-commited (workingarea) fiels into WIP mode
+-> git stash apply -> it will help us to get back to our working area
+-> git tag is used to tagging your commits while delvering your project
+-> git tag <tag-name> will create an tag then assigned to recent commit
+-> git tag <tag-name> <commit-id> will assigin tag-name on  run time to particular commit id
+-> git tag <tag-name> -f <commit-id> will assing wrong commit to right commit informaton
+-> git push --tags command will help us to send all tags information to github
+

@@ -1,0 +1,11 @@
+          **************March expenses bill generation*****************
+deposited amount=8000
+bujamma =1000
+zomato=139.32
+badminton court fees=1000
+alovera paste= 1130
+train ticket=367.29
+movie tickets=400
+recharge drink=50
+total =4086.61
+localhost:8080/job/Automateddeployment/build?token=123456789

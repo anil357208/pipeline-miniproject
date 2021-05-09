@@ -1,0 +1,71 @@
+mini project name : Continuous Integration using CI pipeline 
+description: To automate the process whenever developer commit the code automatically build,test and release the code
+tools: Jenkins opensource server-building and ci pipeline
+	maven : Build tool
+	VCS : git and github
+	code analysis : checkstyle
+	notificatios : slack
+	Sonatype Nexus :Artifact/software repository
+	sonarqube :code analysis server
+	aws Ec2 server/instances
+
+
+
+Objective : Fault Isolation
+	    short mttr
+	    Fast Turn Around on Feature changes
+	    Less Disruptive
+
+Jenkins steps:
+       1.Build job
+       2.Setup slack notification
+       3.Checkstyle code analysis job
+       4.Setup Sonar Integration
+       5.Sonar code analysis job
+       6.Artifact upload job
+connect all jobs together with buildpipeline.
+set Automatic build trigger
+Test with intellij
+------------------------------------------------------------------
+
+nexus server port no 8081 and allowing jenkins security groups to download and upload artifacts.
+sonar server port no : 9000 by default
+nginx server port no:80
+jenkins to allow security grioups-allow jenkins to upload reports to sonar server
+edit the inboud in jenkins sg -allow sonar to access for quality gates result and give sonar sg 
+
+--------------------------------------------------------------------------------------------
+
+
+slacknotifications
+--------------------
+1.create a accout and create workspace
+2.create a channel and browse a slack appi.com ->cteate an custom app->name it as Jenkins and give workspace name and hit enter
+3.click  outh and peremissions ->bot token scopes->add chat::write->by scrollup click on install app to workspace->allow->copy the outh token and save it temporarily
+4.install slack notifications plugin and copy the token and create credentials under secret text
+5.configure the slack notificaion setting: check mark on custom slack app bot userand save it.
+6.under post build actions and select necessary notification ,add the credentials,workspace and channel in advanced,test the connection and save it.
+
+
+--------------------------------------------------------------------------------------------------
+
+Nexus server:
+1.create 4 repositories namely release.snapshot,proxy and group
+2.maven(hosted)->name->using snapshot ,create 
+3.maven (hosted)->name->using release,create
+4.maven proxy->name->name the remote repo url copy the url in example and paste it ,create
+5.maven(group)->name,push the created 3 repos and save it
+6.Install nexus artifact uploader,nexus platform,copy artifact,zentimestamp plugins in jenkins.
+----------------------------------------------------------------------------------------------------
+sonarqube server
+
+1.create a account and go to profile->my account ->security and name the token and generate it
+2.install then sonarQubescanner for code analysis and  sonar quality gates plugins for checking the gates and passing the result fail/unstable
+3.Globaltoolconfiguration->install the software automatically and mention name and save it 
+4.configurartion->mark Enable injections and add sonarqube->name,server url and server authentication (private ip of server),credentials(snoar token) in secret text
+5.give the same credentials for quality gates,apply and save it
+6.Quality gates in server->create,name->add condition,search for bugs as metrics,value as 50->add condition
+7.project settings->give created Quality gates
+8.install build pipeline plugin.
+---------------------------------------------------------------------------------------------------
+                     
