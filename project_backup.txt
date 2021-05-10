@@ -1,0 +1,64 @@
+
+			DATA BACKUP OF CI/CD STACK
+			---------------------------
+
+backup : To recover the data whenever needed and another reason is used in cloud formation project 
+In cloud formation we will set automate the entire project and automatically restore the data
+
+We need
+1.s3 bucket
+2.create IAM role with s3 access
+3.Attach role to all your instances
+4.Login to Jenkins instance
+5.Shutdown Jenkins service
+6.cleanup unnecessary data
+7.Archive /var/lib/jenkins
+8.install aws cli
+9.copy jenkns archive to s3 bucket
+10.Login to NEXUS server
+11.Shutdown Nexus service
+12.archive nexus /opt/nexus dir
+13.INSTALL aws cli and configure
+14.copy Nexus archive to same s3 bucket
+14.Login to Sonarserver
+15.Shutdown Sonarserver service
+archive /opt/sonarqube dir
+install aws cli and configure
+copy sonarqube & postgrel archive to same s3 bucket
+Notedown names of
+   1.s3 bucket
+   2.Archive file names
+ ---------------------------------------------------------------------------
+1.create s3 bucket with name vprofile-cicd-backup
+2.give s3 policy as Amazons3FullAccess for ec2 instance  
+3.role name -vprofile-cicd-s3fullaccess
+4.Attach role to all the instances
+5.login to jenkins instance,switch to root user,stop the service
+cd /var/lib,  du -sh jenkins-to check size,cd jenkins
+cd .m2/
+cd .m2/ ls ,cd repository, rm -rf *
+cd ../..
+cd jenkins-->cd workspace,rm -rf *
+cd ../..
+cd jobs ->cd Buildproject->cd builds 
+rm -rf 1 10 9
+c djobs->du -sh *
+du -sh
+tar -czvf jenkins_cicdjobs.tar.gz jenkins
+apt update & apt install awscli -y
+aws s3 cp jenkins_cicdjobs.tar.gz s3://vprofile-cicd-stack-backup/
+------------------------------------------------------------------------------------
+1.login to nexus instance
+sudo -i,
+stop nexus service-->systemctl stop nexus 
+tar -czvf nexus-cicd-vpro.tgz nexus
+aws s3 cp nexus-cicd-vpro-pro.tgz s3://vprofile-cicd-stack-backup/ 
+------------------------------------------------------------------------------------
+1.login to sonarqube instance
+sudo -i
+stop sonar service-->systemctl stop sonarqube
+tar -czvf nexus-cicd-vpro.tgz sonarqube
+aws s3 cp nexus-cicd-vpro-pro.tgz s3://vprofile-cicd-stack-backup/ 
+------------------------------------------------------------------------------------
+
+ 
