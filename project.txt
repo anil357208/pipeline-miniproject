@@ -68,4 +68,4 @@ sonarqube server
 7.project settings->give created Quality gates
 8.install build pipeline plugin.
 ---------------------------------------------------------------------------------------------------
-                     
+                     \ncode pipeline project has done succesfully and build had done
